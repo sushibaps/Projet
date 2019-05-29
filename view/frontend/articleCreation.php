@@ -9,10 +9,10 @@
 </head>
 <body>
     <h1>Bienvenue dans l'interface de création d'articles</h1>
-    <form action="" method="post">
-        <textarea name="titre" id="" cols="20" rows="1" placeholder="Veuillez entrer le titre de votre article"></textarea>
+    <form action="controller/controller.php" method="post">
+        <textarea name="title" id="title" cols="50" rows="1" placeholder="Veuillez entrer le titre de votre article"></textarea>
         <br>
-        <textarea name="article" id="" cols="30" rows="10" placeholder="Veuillez entrer le contenu de votre article"></textarea>
+        <textarea name="article" id="article" cols="100" rows="10" placeholder="Veuillez entrer le contenu de votre article"></textarea>
         <button type="button">Publier</button>
     </form>
 

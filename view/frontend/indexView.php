@@ -9,7 +9,7 @@
     <p>Derniers posts mis en ligne :</p>
 
     <?php
-    while ($donnees = $req->fetch()) {
+    while ($donnees = $posts) {
         ?>
         <div class="posts">
             <h3>
