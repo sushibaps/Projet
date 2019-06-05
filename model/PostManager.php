@@ -1,14 +1,21 @@
 <?php
-require_once ('model/Manager.php');
+require_once ('Manager.php');
 
 class PostManager extends Manager
 {
     public function getPosts()
     {
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT title, content, `date` FROM posts ORDER BY date DESC');
+        try
+        {
+            $db = $this->dbConnect();
+            $req = $db->query('SELECT * FROM posts');
+            return $req;
+        }
+        catch(Exception $e)
+        {
+            die('Erreur : ' .$e->getMessage());
+        }
 
-        return $req;
     }
 
     public function getPost($postId)
@@ -17,6 +24,7 @@ class PostManager extends Manager
         $req = $db->prepare('SELECT title, content, `date` FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
+
 
         return $post;
     }

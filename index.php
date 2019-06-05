@@ -1,6 +1,34 @@
 <?php
+require ('controller/Controller.php');
 
-$db = new PDO('mysql:host=localhost;dbname=projet;charset=utf8', 'root', 'password');
-$req = $db->query('INSERT INTO posts (title, content) VALUES (Bonjour, Je mange bien)');
+try
+{
+    if (isset($_GET['action']))
+    {
+        switch ($_GET['action'])
+        {
+            case 'liste':
+                listPosts();
+            break;
 
-echo 'reussi';
+            case 'creation':
+                articleCreation();
+            break;
+
+            case 'input':
+                articleInput();
+            break;
+
+            default:
+                require('view/frontend/AccueilView.php');
+        }
+    }
+    else
+    {
+        require("view/frontend/AccueilView.php");
+    }
+}
+catch (Exception $e)
+{
+    erreur($e->getMessage());
+}
