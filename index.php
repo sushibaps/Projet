@@ -11,6 +11,10 @@ try
                 listPosts();
             break;
 
+            case 'login':
+                login();
+            break;
+
             case 'creation':
                 articleCreation();
             break;

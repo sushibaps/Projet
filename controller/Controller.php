@@ -12,7 +12,7 @@ function listPosts()
 
 function articleCreation()
 {
-    require('view/frontend/articleCreation.php');
+    require('view/backend/articleCreation.php');
 }
 
 function articleInput()
@@ -21,4 +21,9 @@ function articleInput()
 
     $creation = new PostCreator();
     $creation->createPost();
+}
+
+function login()
+{
+    require ('view/frontend/loginView.php');
 }
