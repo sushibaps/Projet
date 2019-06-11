@@ -1,5 +1,6 @@
 <?php
-require ('controller/Controller.php');
+require('controller/PostController.php');
+require ('controller/CommentController.php');
 
 try
 {
@@ -7,25 +8,41 @@ try
     {
         switch ($_GET['action'])
         {
-            case 'liste':
+            case 'listPosts':
                 listPosts();
             break;
 
-            case 'creation':
+            case 'listComments':
+                listComments();
+            break;
+
+            case 'articleCreation':
                 articleCreation();
             break;
 
-            case 'input':
-                articleInput();
+            case 'commentCreation':
+                commentCreation();
+            break;
+
+            case 'inputPost':
+                inputPost();
+            break;
+
+            case 'inputComment':
+                inputComment();
+            break;
+
+            case 'login';
+                Login();
             break;
 
             default:
-                require('view/frontend/AccueilView.php');
+                Home();
         }
     }
     else
     {
-        require("view/frontend/AccueilView.php");
+        Home();
     }
 }
 catch (Exception $e)

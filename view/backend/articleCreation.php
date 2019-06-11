@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Bienvenue dans l'interface de création d'article</h1>
-    <form action="index.php?action=input" method="post">
+    <form action="index.php?action=inputPost" method="post">
         <textarea name="title" id="title" cols="50" rows="1" placeholder="Veuillez entrer le titre de votre article"></textarea>
         <br>
         <textarea name="article" id="article" cols="100" rows="10" placeholder="Veuillez entrer le contenu de votre article"></textarea>

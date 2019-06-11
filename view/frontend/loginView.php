@@ -8,7 +8,7 @@
     <title>Jean Forteroche | Identification</title>
 </head>
 <body>
-<form action="login.php" method="post" >
+<form action="index.php?action=articleCreation" method="post" >
     <p>
         <label for="user">Identifiant : </label>
         <input type="text" name="user">
@@ -17,7 +17,7 @@
         <label for="password">Mot de passe : </label>
         <input type="text" name="password">
     </p>
-    <button type="button">S'identifier</button>
+    <button type="submit">S'identifier</button>
 </form>
 
 </body>
