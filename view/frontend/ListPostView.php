@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <?php while ($data = $posts->fetch())
 { ?>
-    <a href="index.php?action=commentCreation">
+    <a href="index.php?action=displayPost&id=<?php echo $data['id']; ?>">
         <article>
         <header>
             <h1><?php echo $data['title']; ?></h1>
@@ -15,6 +15,7 @@
     <br />
     <hr />
 <?php } ?>
+<?php $posts->closeCursor(); ?>
 <?php $contenu = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

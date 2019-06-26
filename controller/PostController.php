@@ -43,7 +43,15 @@ function Login()
     require ('view/frontend/loginView.php');
 }
 
-function confirmLogin()
+function displayPost($PostId)
 {
+    require ('model/PostManager.php');
+    require ('model/CommentManager.php');
 
+    $postmanager = new PostManager();
+    $post = $postmanager->getPost($PostId);
+    $commentmanager = new CommentManager();
+    $comment = $commentmanager->getCommentsForPost($PostId);
+
+    require ('view/frontend/DisplayPostView.php');
 }

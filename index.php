@@ -1,6 +1,7 @@
 <?php
 require('controller/PostController.php');
 require ('controller/CommentController.php');
+require ('controller/LoginController.php');
 
 try
 {
@@ -12,24 +13,28 @@ try
                 listPosts();
             break;
 
-<<<<<<< HEAD
+            case 'displayPost':
+                displayPost($_GET['id']);
+            break;
+
             case 'listComments':
                 listComments();
             break;
 
             case 'articleCreation':
-=======
+                articleCreation();
+            break;
+            
             case 'login':
-                login();
+                Login();
+            break;
+
+            case 'verifyLogin':
+                VerifyLogin();
             break;
 
             case 'creation':
->>>>>>> ad97ffd6814d0c5988c992fe95a05d8a6b37264d
                 articleCreation();
-            break;
-
-            case 'commentCreation':
-                commentCreation();
             break;
 
             case 'inputPost':
@@ -40,8 +45,8 @@ try
                 inputComment();
             break;
 
-            case 'login';
-                Login();
+            case 'Disconnect':
+                Disconnect();
             break;
 
             default:

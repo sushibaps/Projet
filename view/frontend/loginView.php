@@ -8,7 +8,7 @@
     <title>Jean Forteroche | Identification</title>
 </head>
 <body>
-<form action="index.php?action=articleCreation" method="post" >
+<form action="index.php?action=verifyLogin" method="post" >
     <p>
         <label for="user">Identifiant : </label>
         <input type="text" name="user">

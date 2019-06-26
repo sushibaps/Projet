@@ -10,11 +10,6 @@ function listComments()
     require ('view/frontend/ListCommentView.php');
 }
 
-function commentCreation()
-{
-    require ('view/frontend/commentCreation.php');
-}
-
 function inputComment()
 {
     require ('model/CommentCreator.php');
