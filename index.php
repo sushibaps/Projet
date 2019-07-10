@@ -1,64 +1,84 @@
 <?php
 require('controller/PostController.php');
-require ('controller/CommentController.php');
-require ('controller/LoginController.php');
+require('controller/CommentController.php');
+require('controller/LoginController.php');
+require('controller/BackController.php');
 
-try
-{
-    if (isset($_GET['action']))
-    {
-        switch ($_GET['action'])
-        {
+try {
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
             case 'listPosts':
                 listPosts();
-            break;
+                break;
 
             case 'displayPost':
                 displayPost($_GET['id']);
-            break;
+                break;
 
             case 'listComments':
                 listComments();
-            break;
+                break;
 
-            case 'articleCreation':
-                articleCreation();
-            break;
-            
             case 'login':
                 Login();
-            break;
+                break;
 
             case 'verifyLogin':
                 VerifyLogin();
-            break;
+                break;
 
             case 'creation':
                 articleCreation();
-            break;
+                break;
 
             case 'inputPost':
                 inputPost();
-            break;
+                break;
 
             case 'inputComment':
-                inputComment();
-            break;
+                inputComment($_GET['id']);
+                break;
+
+            case 'signalComment':
+                signalComment($_GET['id']);
+                break;
+
+            // Backoffice
+
+            case 'AccueilBackEnd':
+                AccueilBackEnd();
+                break;
+
+            case 'articleCreation':
+                articleCreation();
+                break;
+
+            case 'articleSuppression':
+                articleSuppression($_GET['id']);
+                break;
+
+            case 'articleModification':
+                articleModification($_GET['id']);
+                break;
+
+            case 'modifPost':
+                modifPost($_GET['id']);
+                break;
+
+            case 'commentSuppression':
+                commentSuppression($_GET['id']);
+                break;
 
             case 'Disconnect':
                 Disconnect();
-            break;
+                break;
 
             default:
                 Home();
         }
-    }
-    else
-    {
+    } else {
         Home();
     }
-}
-catch (Exception $e)
-{
+} catch (Exception $e) {
     erreur($e->getMessage());
 }

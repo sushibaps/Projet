@@ -9,7 +9,7 @@ function VerifyLogin()
     $data = $login->getLogs();
     if (password_verify($_POST['password'], $data['password']))
     {
-        $_SESSION['login'] = 1;
+        $_SESSION['login'] = session_id();
         require('view/backend/AccueilBackendView.php');
     }
     else

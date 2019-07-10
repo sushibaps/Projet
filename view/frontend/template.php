@@ -9,70 +9,29 @@
     <title><?php echo $titre ?></title>
 </head>
 <body>
-    <main>
-        <header>
-            <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-                <div class="container">
-                    <a class="navbar-brand" href="index.php">Accueil</a>
-                    <div id="navcol-1" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" href="index.php?action=listPosts">Articles</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" href="index.php?action=listComments">Messages</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" href="index.php?action=listPosts">A propos de Jean</a>
-                            </li>
-                        </ul>
-                        <span class="navbar-text actions">
-                            <a class="btn btn-light action-button" role="button" href="index.php?action=login">Log in</a>
-                        </span>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <section>
-            <?= $contenu ?>
-        </section>
-
-        <div class="footer-basic">
-            <footer>
-                <div class="social">
-                    <a href="#">
-                        <i class="icon ion-social-instagram"></i>
-                    </a>
-                    <a href="#">
-                        <i class="icon ion-social-snapchat"></i>
-                    </a>
-                    <a href="#">
-                        <i class="icon ion-social-twitter"></i>
-                    </a>
-                    <a href="#">
-                        <i class="icon ion-social-facebook"></i>
-                    </a>
-                </div>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a href="index.php">Accueil</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="index.php?action=listPosts">Articles</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="index.php?action=listComments">Commentaires</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">A propos de Jean</a>
-                    </li>
-                </ul>
-                <p class="copyright">Jean Forteroche © 2019 Tous droits réservés</p>
-            </footer>
-
+<nav class="navbar navbar-light navbar-expand-md">
+    <div class="container-fluid"><a class="navbar-brand" href="#">Brand</a>
+        <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse"
+             id="navcol-1">
+            <ul class="nav navbar-nav">
+                <li role="presentation" class="nav-item"><a class="nav-link active" href="index.php">Accueil</a></li>
+                <li role="presentation" class="nav-item"><a class="nav-link" href="index.php?action=listPosts">Articles</a></li>
+                <li role="presentation" class="nav-item"><a class="nav-link" href="index.php?action=listComments">Commentaires</a></li>
+            </ul>
+            <a class="btn btn-primary text-left ml-auto" type="button" href="index.php?action=login">Log In</a>
         </div>
-    </main>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+<section>
+    <?= $contenu ?>
+</section>
 
 </body>
 </html>

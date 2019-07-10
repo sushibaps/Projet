@@ -1,6 +1,7 @@
-<?php session_start(); ?>
-
 <?php
 
-function
+function AccueilBackEnd()
+{
+    require ('view/backend/AccueilBackendView.php');
+}
 

@@ -37,11 +37,30 @@ class PostManager
     public function getPost($postId)
     {
         $db = Connection::getConnection()->db();
-        $req = $db->prepare('SELECT title, content, `date` FROM posts WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, content, `date` FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
 
 
         return $post;
+    }
+
+    public function deletePost($PostId)
+    {
+        $db = Connection::getConnection()->db();
+        $req = $db->prepare('DELETE FROM posts WHERE id = ?');
+        $req->execute(array($PostId));
+        return $req;
+    }
+
+    public function updatePost($PostId)
+    {
+        $db = Connection::getConnection()->db();
+        $req = $db->prepare('UPDATE posts SET title = :title, content = :content WHERE id = :id');
+        $req->execute(array(
+            ':title' => htmlspecialchars($_POST['title']),
+            ':content' => htmlspecialchars($_POST['article']),
+            ':id' => $PostId
+        ));
     }
 }

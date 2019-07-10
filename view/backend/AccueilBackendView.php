@@ -1,5 +1,6 @@
 <?php
-    if(isset($_SESSION['login'])) {?>
+if (isset($_SESSION['login'])) {
+if (session_id() === $_SESSION['login']) {?>
 
 <?php $titre = "Espace d'administration"; ?>
 
@@ -10,8 +11,9 @@
 
 <?php require ('view/backend/TemplateBack.php'); ?>
 <?php }
+    }
     else
     {
-        echo ("Cette partie du site est réservé aux administrateurs, veuillez "); ?>
-        <a href="index.php">retourner à l'accueil.</a>
+    echo ("Cette partie du site est réservé aux administrateurs, veuillez "); ?>
+    <a href="../../index.php?action=Disconnect">retourner à l'accueil.</a>
 <?php } ?>

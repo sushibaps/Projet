@@ -1,0 +1,40 @@
+.ion-ios-locked-outline
+{
+    font-size: 140px;
+    color: rgb(41,128,239);
+}
+
+.btn
+{
+    color: white;
+    background-color: rgb(33,74,128);
+    border-color: rgb(33,74,128);
+    height: 6vh;
+}
+
+.form-control, .form-control:focus, .form-group, .form-group:focus
+{
+    border: none!important;
+    border-bottom : 1px solid #434a52!important;
+}
+
+.log-form
+{
+    box-shadow: 2px 2px 5px #343a40;
+}
+
+.log-a
+{
+    color: #6f7a85;
+}
+
+.log-body
+{
+    background-image : url("../../public/images/mesa.jpg");
+    background-size: cover;
+}
+
+.h2
+{
+    display: none;
+}
