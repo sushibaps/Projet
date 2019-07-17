@@ -6,8 +6,8 @@
 <div>
     <p><?php echo $data['content']; ?></p>
     <p><?php echo $data['author']; ?></p>
-    <time><?php echo $data['date']; ?></time>s
-    <a href="index.php?action=signalComment&id=<?php echo $data['id_comment']; ?>"><i class="fas fa-exclamation-circle text-danger">poeut</i></a>
+    <time><?php echo $data['date']; ?></time>
+    <a href="index.php?action=signalComment&id=<?php echo $data['id_comment']; ?>" class="text-danger"><i class="fas fa-exclamation-circle text-danger"></i>Signaler un commentaire inapproprié</a>
     <p>Signalements : <?php echo $data['signalements']; ?></p>
 </div>
 <br />

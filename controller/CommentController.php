@@ -1,46 +1,44 @@
 <?php
+require_once('model/CommentManager.php');
+require_once('model/CommentCreator.php');
 
-function listComments()
+class CommentController
 {
-    require('model/CommentManager.php');
 
-    $commentmanager = new CommentManager();
-    $comments = $commentmanager->getComments();
+    public function listComments()
+    {
+        $commentmanager = new CommentManager();
+        $comments = $commentmanager->getComments();
 
-    require('view/frontend/ListCommentView.php');
-}
-
-function inputComment($PostId)
-{
-    require('model/CommentCreator.php');
-
-    $creation = new CommentCreator();
-    $creation->createComment($PostId);
-
-    if (isset($_SESSION['login'])) {
-        if (session_id() === $_SESSION['login'])
-            AccueilBackEnd();
-    } else {
-        Home();
+        require('view/frontend/ListCommentView.php');
     }
-}
 
-function commentSuppression($CommentId)
-{
-    require ('model/CommentManager.php');
+    public function inputComment($PostId)
+    {
+        $creation = new CommentCreator();
+        $creation->createComment($PostId);
 
-    $commentmanager = new CommentManager();
-    $commentsuppression = $commentmanager->CommentSuppression($CommentId);
+        if (isset($_SESSION['login'])) {
+            if (session_id() === $_SESSION['login'])
+                AccueilBackEnd();
+        } else {
+            require ('index.php?action=default');
+        }
+    }
 
-    require ('view/backend/AccueilBackendView.php');
-}
+    public function commentSuppression($CommentId)
+    {
+        $commentmanager = new CommentManager();
+        $commentsuppression = $commentmanager->CommentSuppression($CommentId);
 
-function signalComment($CommentId)
-{
-    require ('model/CommentManager.php');
+        require('view/backend/AccueilBackendView.php');
+    }
 
-    $commentmanager = new CommentManager();
-    $signalcomment = $commentmanager->signalComment($CommentId);
+    public function signalComment($CommentId)
+    {
+        $commentmanager = new CommentManager();
+        $signalcomment = $commentmanager->signalComment($CommentId);
 
-    Home();
+        require ('index.php?action=default');
+    }
 }

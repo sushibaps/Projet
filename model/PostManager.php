@@ -23,7 +23,7 @@ class PostManager
         try
         {
             $db = Connection::getConnection()->db();
-            $req = $db->query('SELECT * FROM posts');
+            $req = $db->query('SELECT * FROM posts ORDER BY id DESC');
 
             return $req;
         }

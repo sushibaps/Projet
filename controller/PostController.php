@@ -1,92 +1,84 @@
 <?php
+require_once('model/PostManager.php');
+require_once('model/PostCreator.php');
+require_once('model/CommentManager.php');
 
-function Home()
+class PostController
 {
-    require ('model/PostManager.php');
 
-    $postmanager = new PostManager();
-    $firstpost = $postmanager->getFirstPost();
+    public function Home()
+    {
+        $postmanager = new PostManager();
+        $firstpost = $postmanager->getFirstPost();
 
-    require ('view/frontend/AccueilView.php');
-}
+        require('view/frontend/AccueilView.php');
+    }
 
-function listPosts()
-{
-    require ('model/PostManager.php');
 
-    $postmanager = new PostManager();
-    $posts = $postmanager->getPosts();
+    public function listPosts()
+    {
+        $postmanager = new PostManager();
+        $posts = $postmanager->getPosts();
 
-    require ('model/CommentManager.php');
+        $commentmanager = new CommentManager();
+        $commentnumber = $commentmanager->getCommentsNumber();
 
-    $commentmanager = new CommentManager();
-    $commentnumber = $commentmanager->getCommentsNumber();
+        require('view/frontend/ListPostView.php');
+    }
 
-    require('view/frontend/ListPostView.php');
-}
+    public function articleCreation()
+    {
+        require('view/backend/articleCreation.php');
+    }
 
-function articleCreation()
-{
-    require('view/backend/articleCreation.php');
-}
+    public function articleModification($PostId)
+    {
+        $postmanager = new PostManager();
+        $post = $postmanager->getPost($PostId);
 
-function articleModification($PostId)
-{
-    require ('model/PostManager.php');
+        require('view/backend/articleModification.php');
+    }
 
-    $postmanager = new PostManager();
-    $post = $postmanager->getPost($PostId);
+    public function modifPost($PostId)
+    {
+        $postmanager = new PostManager();
+        $post = $postmanager->updatePost($PostId);
 
-    require ('view/backend/articleModification.php');
-}
+        require('view/backend/AccueilBackendView.php');
+    }
 
-function modifPost($PostId)
-{
-    require ('model/PostManager.php');
+    public function inputPost()
+    {
+        $creation = new PostCreator();
+        $creation->createPost();
 
-    $postmanager = new PostManager();
-    $post = $postmanager->updatePost($PostId);
+        require('view/backend/AccueilBackendView.php');
+    }
 
-    require ('view/backend/AccueilBackendView.php');
-}
+    public function Login()
+    {
+        require('view/frontend/loginView.php');
+    }
 
-function inputPost()
-{
-    require('model/PostCreator.php');
+    public function displayPost($PostId)
+    {
+        $postmanager = new PostManager();
+        $post = $postmanager->getPost($PostId);
 
-    $creation = new PostCreator();
-    $creation->createPost();
+        $commentmanager = new CommentManager();
+        $comment = $commentmanager->getCommentsForPost($PostId);
 
-    require ('view/backend/AccueilBackendView.php');
-}
+        require('view/frontend/DisplayPostView.php');
+    }
 
-function Login()
-{
-    require ('view/frontend/loginView.php');
-}
+    public function articleSuppression($PostId)
+    {
+        $postmanager = new PostManager();
+        $deletepost = $postmanager->deletePost($PostId);
 
-function displayPost($PostId)
-{
-    require ('model/PostManager.php');
-    require ('model/CommentManager.php');
+        $commentmanager = new CommentManager();
+        $deletecomment = $commentmanager->CommentSuppressionByPost($PostId);
 
-    $postmanager = new PostManager();
-    $post = $postmanager->getPost($PostId);
-    $commentmanager = new CommentManager();
-    $comment = $commentmanager->getCommentsForPost($PostId);
-
-    require ('view/frontend/DisplayPostView.php');
-}
-
-function articleSuppression($PostId)
-{
-    require ('model/PostManager.php');
-    require ('model/CommentManager.php');
-
-    $postmanager = new PostManager();
-    $deletepost = $postmanager->deletePost($PostId);
-    $commentmanager = new CommentManager();
-    $deletecomment = $commentmanager->CommentSuppressionByPost($PostId);
-
-    require ('view/backend/AccueilBackendView.php');
+        require('view/backend/AccueilBackendView.php');
+    }
 }

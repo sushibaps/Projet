@@ -22,11 +22,15 @@
     <aside>
         <p><?php echo $data['content']; ?></p>
         <p>Ecrit par <?php echo $data['author']; ?> le <?php echo $data['date']; ?>.</p>
-        <a href="index.php?action=commentSuppression&id=<?php echo $data['id_comment']; ?>"
-           title="Supprimer le commentaire"><i
-                    class="fas fa-trash-alt text-danger"></i></a>
-        <a href="index.php?action=signalComment&id=<?php echo $data['id_comment']; ?>"><i
-                    class="fas fa-exclamation-circle text-danger">poeut</i></a>
+        <?php if (isset($_SESSION['login'])) {
+            if (session_id() === $_SESSION['login']) { ?>
+                <a href="index.php?action=commentSuppression&id=<?php echo $data['id_comment']; ?>"
+                   title="Supprimer le commentaire"><i
+                            class="fas fa-trash-alt text-danger"></i></a>
+            <?php }
+        } ?>
+        <a href="index.php?action=signalComment&id=<?php echo $data['id_comment']; ?>" class="text-danger"><i
+                    class="fas fa-exclamation-circle text-danger"></i>Signaler un commentaire inapproprié</a>
         <p>Signalements : <?php if ($data['signalements'] > 0)
                 echo $data['signalements'];
             else
@@ -39,7 +43,7 @@
         <h1>Bienvenue dans l'interface de création de commentaire</h1>
         <form action="index.php?action=inputComment&id=<?php echo $post['id']; ?>" method="post">
         <textarea name="comment" id="comment" cols="100" rows="10"
-                  placeholder="Veuillez entrer le texte de votre commentaire."></textarea>
+                  placeholder="Veuillez entrer le texte de votre commentaire." required></textarea>
 
             <?php if (isset($_SESSION['login'])) {
                 if (session_id() === $_SESSION['login']) {
@@ -48,7 +52,7 @@
                 }
             } else { ?>
                 <label for="author">Votre ptit nom : </label>
-                <input type="text" name="author">
+                <input type="text" name="author" required>
                 <br/>
             <?php } ?>
             <button type="submit">Publier</button>

@@ -1,46 +1,57 @@
 <?php
-require('controller/PostController.php');
-require('controller/CommentController.php');
-require('controller/LoginController.php');
 require('controller/BackController.php');
+require('controller/GlobalController.php');
+$globalcontroller = new GlobalController();
 
 try {
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'listPosts':
-                listPosts();
+                $globalcontroller->postcreator->listPosts();
                 break;
 
             case 'displayPost':
-                displayPost($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->postcreator->displayPost($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'listComments':
-                listComments();
+                $globalcontroller->commentcontroller->listComments();
                 break;
 
             case 'login':
-                Login();
+                $globalcontroller->postcreator->Login();
                 break;
 
             case 'verifyLogin':
-                VerifyLogin();
+                $globalcontroller->logincontroller->VerifyLogin();
                 break;
 
             case 'creation':
-                articleCreation();
+                $globalcontroller->postcreator->articleCreation();
                 break;
 
             case 'inputPost':
-                inputPost();
+                $globalcontroller->postcreator->inputPost();
                 break;
 
             case 'inputComment':
-                inputComment($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    if ($_POST['comment'] != "" AND $_POST['author'] != "")
+                        $globalcontroller->commentcontroller->inputComment($_GET['id']);
+                    else
+                        require ('view/frontend/ErrorView.php');
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'signalComment':
-                signalComment($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->commentcontroller->signalComment($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             // Backoffice
@@ -50,34 +61,46 @@ try {
                 break;
 
             case 'articleCreation':
-                articleCreation();
+                $globalcontroller->postcreator->articleCreation();
                 break;
 
             case 'articleSuppression':
-                articleSuppression($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->postcreator->articleSuppression($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'articleModification':
-                articleModification($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->postcreator->articleModification($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'modifPost':
-                modifPost($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->postcreator->modifPost($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'commentSuppression':
-                commentSuppression($_GET['id']);
+                if (isset($_GET['id']) AND is_numeric($_GET['id']))
+                    $globalcontroller->commentcontroller->commentSuppression($_GET['id']);
+                else
+                    require('view/frontend/ErrorView.php');
                 break;
 
             case 'Disconnect':
-                Disconnect();
+                $globalcontroller->logincontroller->Disconnect();
                 break;
 
             default:
-                Home();
+                $globalcontroller->postcreator->Home();
         }
     } else {
-        Home();
+        $globalcontroller->postcreator->Home();
     }
 } catch (Exception $e) {
     erreur($e->getMessage());

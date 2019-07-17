@@ -8,7 +8,7 @@ class CommentManager
         try
         {
             $db = Connection::getConnection()->db();
-            $req = $db->query('SELECT * FROM comments');
+            $req = $db->query('SELECT * FROM comments ORDER BY id_comment DESC');
             return $req;
         }
         catch(Exception $e)
