@@ -5,9 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "tinymce": "^5.0.12"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

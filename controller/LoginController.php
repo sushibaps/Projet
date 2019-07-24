@@ -13,8 +13,11 @@ class LoginController
         if (password_verify($_POST['password'], $data['password'])) {
             $_SESSION['login'] = session_id();
             require('view/backend/AccueilBackendView.php');
-        } else
+        } else {
+            $error = "login";
             require('view/frontend/ErrorView.php');
+        }
+
     }
 
     public function Disconnect()

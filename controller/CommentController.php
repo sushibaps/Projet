@@ -1,44 +1,69 @@
 <?php
 require_once('model/CommentManager.php');
-require_once('model/CommentCreator.php');
+require_once('model/PostManager.php');
 
 class CommentController
 {
 
+    public function __construct()
+    {
+        $this->commentmanager = new CommentManager();
+        $this->postmanager = new PostManager();
+    }
+
     public function listComments()
     {
-        $commentmanager = new CommentManager();
-        $comments = $commentmanager->getComments();
+        $comments = $this->commentmanager->getComments();
 
         require('view/frontend/ListCommentView.php');
     }
 
     public function inputComment($PostId)
     {
-        $creation = new CommentCreator();
-        $creation->createComment($PostId);
+        if (isset($PostId) AND is_numeric($PostId) AND $_POST['comment'] != "" AND $_POST['author'] != "") {
+            $this->commentmanager->createComment($PostId);
+            if (isset($_SESSION['login']) AND session_id() === $_SESSION['login']) {
+                require('view/backend/AccueilBackendView.php');
+            } else {
+                $firstpost = $this->postmanager->getFirstPost();
 
-        if (isset($_SESSION['login'])) {
-            if (session_id() === $_SESSION['login'])
-                AccueilBackEnd();
+                require('view/frontend/AccueilView.php');
+            }
         } else {
-            require ('index.php?action=default');
+            $error = "Veuillez entrer un commentaire";
+            $post = $this->postmanager->getPost($PostId);
+
+            $comment = $this->commentmanager->getCommentsForPost($PostId);
+
+            require('view/frontend/DisplayPostView.php');
         }
+
     }
 
     public function commentSuppression($CommentId)
     {
-        $commentmanager = new CommentManager();
-        $commentsuppression = $commentmanager->CommentSuppression($CommentId);
+        if (isset($CommentId) AND is_numeric($CommentId) AND isset($_SESSION['login']) AND session_id() === $_SESSION['login']) {
+            $commentsuppression = $this->commentmanager->CommentSuppression($CommentId);
 
-        require('view/backend/AccueilBackendView.php');
+            require('view/backend/AccueilBackendView.php');
+        } else {
+            $error = "commentsuppression";
+            require('view/frontend/ErrorView.php');
+        }
+
     }
 
     public function signalComment($CommentId)
     {
-        $commentmanager = new CommentManager();
-        $signalcomment = $commentmanager->signalComment($CommentId);
+        if (isset($CommentId) AND is_numeric($CommentId)) {
+            $signalcomment = $this->commentmanager->signalComment($CommentId);
+            $firstpost = $this->postmanager->getFirstPost();
 
-        require ('index.php?action=default');
+            require('view/frontend/AccueilView.php');
+        } else {
+            $error = "signalcomment";
+            require('view/frontend/ErrorView.php');
+        }
+
     }
 }

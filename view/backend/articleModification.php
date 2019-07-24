@@ -1,10 +1,10 @@
 <?php
-if(isset($_SESSION['login'])) {?>
+if(isset($_SESSION['login']) AND session_id() === $_SESSION['login']) {?>
 
 <?php $titre = "Modification d'article"; ?>
 
 <?php ob_start(); ?>
-    <h1>Bienvenue dans l'interface de création d'article</h1>
+    <h1>Bienvenue dans l'interface de modification d'article</h1>
     <form action="index.php?action=modifPost&id=<?php echo $post['id']; ?>" method="post">
         <textarea name="title" id="title" cols="50" rows="1"><?php echo $post['title']; ?></textarea>
         <br>

@@ -11,7 +11,7 @@
             if (session_id() === $_SESSION['login']) {
                 ?><a href="index.php?action=articleSuppression&id=<?php echo $post['id']; ?>"
                      title="Supprimer l'article"><i
-                            class="fas fa-trash-alt text-danger"></i></a>
+                            class="fas fa-trash-alt text-danger" title="Supprimer l'article"></i></a>
                 <br/>
                 <a href="index.php?action=articleModification&id=<?php echo $post['id']; ?>">Modifier l'article</a>
             <?php }
@@ -39,25 +39,34 @@
     <br/>
 <?php } ?>
     <hr>
-    <article>
-        <h1>Bienvenue dans l'interface de création de commentaire</h1>
-        <form action="index.php?action=inputComment&id=<?php echo $post['id']; ?>" method="post">
-        <textarea name="comment" id="comment" cols="100" rows="10"
-                  placeholder="Veuillez entrer le texte de votre commentaire." required></textarea>
+    <h1>Bienvenue dans l'interface de création de commentaire</h1>
+    <form method="post" action="index.php?action=inputComment&id=<?php echo $post['id']; ?>">
+        <textarea name="comment" id="commentary" cols="100" rows="10"
+                  placeholder="<?php if (isset($_POST['comment']) AND $_POST['comment'] != "") {
+                      echo $_POST['comment'];
+                  } else {
+                      echo "Veuillez entrer votre commentaire";
+                  } ?>" required></textarea>
 
-            <?php if (isset($_SESSION['login'])) {
-                if (session_id() === $_SESSION['login']) {
-                    ?><input type="text" name="author" value="Jean Forteroche">
-                    <?php
-                }
-            } else { ?>
-                <label for="author">Votre ptit nom : </label>
-                <input type="text" name="author" required>
-                <br/>
-            <?php } ?>
-            <button type="submit">Publier</button>
-        </form>
-    </article>
+        <?php if (isset($_SESSION['login'])) {
+            if (session_id() === $_SESSION['login']) {
+                ?><input type="text" name="author" value="Jean Forteroche">
+                <?php
+            }
+        } else { ?>
+            <label for="author">Votre pseudo : </label>
+            <input type="text" name="author" id="author"
+                   placeholder="<?php if (isset($_POST['author']) AND $_POST['author'] != "") {
+                       echo $_POST['author'];
+                   } else {
+                       echo "Veuillez entrer votre nom ou pseudo";
+                   } ?>" required>
+            <br/>
+        <?php } ?>
+        <button type="submit">Publier</button>
+    </form>
+<?php if (isset($error)) {
+    ?> <p class="text-danger"><?php echo $error; ?></p> <?php } ?>
     <br/>
 <?php $contenu = ob_get_clean(); ?>
 

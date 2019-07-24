@@ -14,7 +14,7 @@
          <p><?php echo $data['content']; ?></p>
      </article>
      <hr />
- <?php } ?>
+ <?php } ;?>
 
  <?php $contenu = ob_get_clean(); ?>
 

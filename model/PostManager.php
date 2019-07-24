@@ -45,6 +45,16 @@ class PostManager
         return $post;
     }
 
+    public function createPost()
+    {
+        $db = Connection::getConnection()->db();
+        $req = $db->prepare('INSERT INTO posts(title, content, `date`) VALUES (:title, :content, NOW())');
+        $req->execute(array(
+            'title' => htmlspecialchars($_POST['title']),
+            'content' => htmlspecialchars($_POST['article'])
+        ));
+    }
+
     public function deletePost($PostId)
     {
         $db = Connection::getConnection()->db();
@@ -62,5 +72,6 @@ class PostManager
             ':content' => htmlspecialchars($_POST['article']),
             ':id' => $PostId
         ));
+        return $req;
     }
 }
